@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HMS.Entity.Models.PatientReg>
+
+<div class="row">
+    <div class="col-12">
+        <h3>Patient Registration</h3>
+        <hr />
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Patient Id</th>
+                    <th>Patient Name</th>
+                    <th> Admission Date</th>
+                    <th> Age</th>
+                    <th>Gender </th>
+                    <th> Address</th>
+                    <th> Phone Number</th>
+                    <th>Blood Group </th>
+                    <th> Patient Issue</th>
+                    <th> Patient Type</th>
+                    <th>Doctor Name </th>
+                    <th> Doctor Type</th>
+                    <th>Ward Number </th>
+                    <th> Bed Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                if(Model!=null){
+                
+                @foreach (var patientReg in Model)
+                {
+                    
+                <tr>
+                    <td>@patientReg.PatientId</td>
+                    <td>@patientReg.PatientName</td>
+                    <td>@patientReg.AdmissionDate</td>
+                    <td>@patientReg.Age</td>
+                    <td>@patientReg.Gender</td>
+                    <td>@patientReg.Address</td>
+                    <td>@patientReg.PhoneNumber</td>
+                    <td>@patientReg.BloodGroup</td>
+                    <td>@patientReg.PatientIssue</td>
+                    <td>@patientReg.PatientType</td>
+                    <td>@patientReg.DoctorName</td>
+                    <td>@patientReg.DoctorType</td>
+                    <td>@patientReg.WardNumber</td>
+                    <td>@patientReg.BedNumber</td>
+                    
+                    
+                    <td><a asp-controller="PatientRegUI" asp-action="UpdatePatient" asp-route-MovieId="@patientReg.PatientId">Update</a></td>
+                    <td><a asp-controller="PatientRegUI" asp-action="DeletePatient" asp-route-MovieId="@patientReg.PatientId">Delete</a></td>
+                </tr>
+                }}
+            </tbody>
+        </table>
+    </div>
+</div>
