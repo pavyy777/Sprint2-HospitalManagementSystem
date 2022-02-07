@@ -33,7 +33,8 @@ namespace HospitalManagementSystem
             services.AddControllers();
             services.AddTransient<IPatientRegRepository, PatientRegRepository>();
             services.AddTransient<PatientRegServices, PatientRegServices>();
-           
+            services.AddTransient<IDoctorRepository, DoctorRepository>();
+            services.AddTransient<DoctorServices, DoctorServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
