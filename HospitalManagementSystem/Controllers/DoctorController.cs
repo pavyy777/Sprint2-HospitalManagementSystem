@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
     [ApiController]
     public class DoctorController : ControllerBase
     {
@@ -35,7 +35,7 @@ namespace HospitalManagementSystem.Controllers
             _doctorServices.DeleteDoctor(DoctorId);
             return Ok("Doctor deleted successfully!!");
         }
-        [HttpPut("UpdateDoctor]")]
+        [HttpPut("UpdateDoctor")]
         public IActionResult UpdateDoctor([FromBody] Doctor doctor)
         {
             _doctorServices.UpdateDoctor(doctor);

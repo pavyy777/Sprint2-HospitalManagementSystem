@@ -2,12 +2,12 @@
 
 <div class="row">
     <div class="col-12">
-        <h3>Doctor Registration</h3>
+        <h3>Doctor Registration History</h3>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Doctor Id</th>
+                    <th>Doctor ID</th>
                     <th>Doctor Name</th>
                     <th> Doctor Qualification</th>
                     <th> Doctor Specilization</th>
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                if(Model!=null){
+               
 
                 @foreach (var doctor in Model)
                 {
@@ -42,7 +42,7 @@
                     <td><a asp-controller="Doctor" asp-action="UpdateDoctor" asp-route-MovieId="@doctor.DoctorId">Update</a></td>
                     <td><a asp-controller="Doctor" asp-action="DeleteDoctor" asp-route-MovieId="@doctor.DoctorId">Delete</a></td>
                 </tr>
-                }}
+                }
             </tbody>
         </table>
     </div>

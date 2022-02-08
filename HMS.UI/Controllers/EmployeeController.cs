@@ -11,48 +11,48 @@ using System.Threading.Tasks;
 
 namespace HMS.UI.Controllers
 {
-    public class PatientRegUIController : Controller
+    public class EmployeeController : Controller
     {
         private IConfiguration _configuration;
-        public PatientRegUIController(IConfiguration configuration)
+        public EmployeeController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> EmployeeIndex()
         {
-            IEnumerable<PatientReg> patientresult = null;
+            IEnumerable<Employee> employeeresult = null;
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "PatientReg/GetPatients";
+                string endPoint = _configuration["WebApiBaseUrl"] + "Employee/GetEmployees";
                 using (var response = await client.GetAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
-                        patientresult = JsonConvert.DeserializeObject<IEnumerable<PatientReg>>(result);
+                        employeeresult = JsonConvert.DeserializeObject<IEnumerable<Employee>>(result);
                     }
                 }
             }
-            return View(patientresult);
+            return View(employeeresult);
         }
-        public IActionResult AddPatient()
+        public IActionResult AddEmployee()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> AddPatient(PatientReg patientReg)
+        [HttpPost("AddEmployee")]
+        public async Task<IActionResult> AddEmployee(Employee employee)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(patientReg), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "PatientReg/AddPatient";
+                StringContent content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Employee/AddEmployee";
                 using (var response = await client.PostAsync(endPoint, content))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "Patient details saved successfully!";
+                        ViewBag.message = "  Employee details saved successfully!";
                     }
                     else
                     {
