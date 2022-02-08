@@ -63,5 +63,90 @@ namespace HMS.UI.Controllers
             }
             return View();
         }
+        public IActionResult UpdateDoctor()
+        {
+            return View();
+        }
+        [HttpPut("UpdateDoctor")]
+        public async Task<IActionResult> UpdateDoctor(Doctor doctor)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/UpdateDoctor";
+                using (var response = await client.PostAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "  Doctor details saved successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong entries!";
+                    }
+                }
+            }
+            return View();
+        }
+        public IActionResult DeleteDoctor()
+        {
+            return View();
+        }
+        [HttpDelete("DeleteDoctor")]
+        public async Task<IActionResult> DeleteDoctor(int doctorId)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctorId), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/DeleteDoctor";
+                using (var response = await client.PostAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "  Doctor details Deleted successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong entries!";
+                    }
+                }
+            }
+            return View();
+        }
+            public IActionResult GetDoctorById()
+            {
+                return View();
+            }
+            [HttpGet("GetDoctorById")]
+            public async Task<IActionResult> GetDoctorById(int doctorId)
+            {
+                ViewBag.status = "";
+                using (HttpClient client = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(doctorId), Encoding.UTF8, "application/json");
+                    string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/AddDoctor";
+                    using (var response = await client.PostAsync(endPoint, content))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = " success!";
+                        }
+                        else
+                        {
+                            ViewBag.status = "Error";
+                            ViewBag.message = "Wrong entries!";
+                        }
+                    }
+                }
+                return View();
+            }
+        }
     }
-}
+

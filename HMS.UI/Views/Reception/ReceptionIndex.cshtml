@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HMS.Entity.Models.Reception>
+
+<div class="row">
+    <div class="col-12">
+        <h3> Appointment History</h3>
+        <hr />
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Appointment Time </th>
+                    <th> Appointment Date </th>
+                    <th> Docotor ID</th>
+                    <th> Patient ID </th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var reception in Model)
+                {
+
+                    <tr>
+                        <td>@reception.AppointmentId</td>
+                        <td>@reception.AppointmentTime</td>
+                        <td>@reception.DoctorId</td>
+                        <td>@reception.PatientId</td>
+                       
+
+
+
+                        <td><a asp-controller="Reception" asp-action="UpdateReception" asp-route-AppointmentId="@reception.AppointmentId">Update</a></td>
+                        <td><a asp-controller="Reception" asp-action="DeleteReception" asp-route-AppointmentId="@reception.AppointmentId">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

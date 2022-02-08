@@ -15,8 +15,10 @@ namespace HMS.DAL.Data
         public DbSet<PatientReg> patientReg { get; set; }
         public DbSet<Doctor> doctor { get; set; }
         public DbSet<Employee> employee { get; set; }
-    }
-    
+        public DbSet<Reception> reception { get; set; }
 
-   
+    }
+
+
+
 }

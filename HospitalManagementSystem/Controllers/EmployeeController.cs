@@ -23,6 +23,11 @@ namespace HospitalManagementSystem.Controllers
         {
             return _employeeServices.GetEmployees();
         }
+        public IActionResult GetEmployeeById(int employeeId)
+        {
+            _employeeServices.GetEmployeeById(employeeId);
+            return Ok("Success");
+        }
         [HttpPost("AddEmployee")]
         public IActionResult AddEmployee([FromBody] Employee employee)
         {

@@ -23,6 +23,11 @@ namespace HospitalManagementSystem.Controllers
         {
             return _patientRegServices.GetPatients();
         }
+        public IActionResult GetPatientById(int patientId)
+        {
+            _patientRegServices.GetPatientById(patientId);
+            return Ok("Success");
+        }
         [HttpPost("AddPatient")]
         public IActionResult AddPatient([FromBody] PatientReg patientReg)
         {

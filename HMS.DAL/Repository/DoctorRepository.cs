@@ -45,6 +45,16 @@ namespace HMS.DAL.Repository
             _hMSDbContext.Entry(doctor).State = EntityState.Modified;
             _hMSDbContext.SaveChanges();
         }
-        
+        public Doctor Login(Doctor doctor)
+        {
+            Doctor doctorinfo = null;
+            var result = _hMSDbContext.doctor.Where(obj => obj.Email == doctor.Email && obj.Password == doctor.Password).ToList();
+            if (result.Count > 0)
+            {
+                doctorinfo = result[0];
+            }
+            return doctorinfo;
+
+        }
     }
 }

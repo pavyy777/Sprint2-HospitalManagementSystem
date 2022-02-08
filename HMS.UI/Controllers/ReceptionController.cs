@@ -11,48 +11,48 @@ using System.Threading.Tasks;
 
 namespace HMS.UI.Controllers
 {
-    public class EmployeeController : Controller
+    public class ReceptionController : Controller
     {
         private IConfiguration _configuration;
-        public EmployeeController(IConfiguration configuration)
+        public ReceptionController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public async Task<IActionResult> EmployeeIndex()
+        public async Task<IActionResult> ReceptionIndex()
         {
-            IEnumerable<Employee> employeeresult = null;
+            IEnumerable<Reception> receptionresult = null;
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Employee/GetEmployees";
+                string endPoint = _configuration["WebApiBaseUrl"] + "Reception/GetAppointments";
                 using (var response = await client.GetAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
-                        employeeresult = JsonConvert.DeserializeObject<IEnumerable<Employee>>(result);
+                        receptionresult = JsonConvert.DeserializeObject<IEnumerable<Reception>>(result);
                     }
                 }
             }
-            return View(employeeresult);
+            return View(receptionresult);
         }
-        public IActionResult AddEmployee()
+        public IActionResult AddAppointment()
         {
             return View();
         }
-        [HttpPost("AddEmployee")]
-        public async Task<IActionResult> AddEmployee(Employee employee)
+        [HttpPost("AddAppointment")]
+        public async Task<IActionResult> AddAppointment(Reception reception)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "Employee/AddEmployee";
+                StringContent content = new StringContent(JsonConvert.SerializeObject(reception), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Reception/AddAppointment";
                 using (var response = await client.PostAsync(endPoint, content))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "  Employee details saved successfully!";
+                        ViewBag.message = "  Doctor details saved successfully!";
                     }
                     else
                     {
@@ -63,24 +63,20 @@ namespace HMS.UI.Controllers
             }
             return View();
         }
-        public IActionResult GetEmployeeById()
-        {
-            return View();
-        }
-        [HttpGet("GetEmployeeById")]
-        public async Task<IActionResult> GetEmployeeById(int employeeId)
+        [HttpPost("EditReception")]
+        public async Task<IActionResult> EditReception(Reception reception)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(employeeId), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/AddDoctor";
+                StringContent content = new StringContent(JsonConvert.SerializeObject(reception), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Reception/EditDoctor";
                 using (var response = await client.PostAsync(endPoint, content))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = " success!";
+                        ViewBag.message = "  Doctor details edited successfully!";
                     }
                     else
                     {

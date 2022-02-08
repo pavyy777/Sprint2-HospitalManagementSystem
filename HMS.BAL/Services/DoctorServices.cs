@@ -35,5 +35,9 @@ namespace HMS.BAL.Services
 
 
         }
+        public Doctor Login(Doctor doctor)
+        {
+            return _doctorRepository.Login(doctor);
+        }
     }
 }

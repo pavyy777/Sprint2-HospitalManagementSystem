@@ -23,6 +23,12 @@ namespace HospitalManagementSystem.Controllers
         {
             return _doctorServices.GetDoctors();
         }
+        [HttpGet("GetDoctorById")]
+        public IActionResult GetDoctorById(int doctorId)
+        {
+            _doctorServices.GetDoctorById(doctorId);
+            return Ok("Success");
+        }
         [HttpPost("AddDoctor")]
         public IActionResult AddDoctor([FromBody] Doctor doctor)
         {
@@ -40,6 +46,15 @@ namespace HospitalManagementSystem.Controllers
         {
             _doctorServices.UpdateDoctor(doctor);
             return Ok(" Doctor successfully!!");
+        }
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] Doctor doctor)
+        {
+            Doctor user = _doctorServices.Login(doctor);
+            if (user != null)
+                return Ok("Login success!!");
+            else
+                return NotFound();
         }
     }
 }
