@@ -11,15 +11,14 @@ namespace HMS.Entity.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AppointmentId { get; set; }
+        [Required(ErrorMessage = "AppointmentTime is Required")]
+        [DataType(DataType.DateTime)]
         public DateTime AppointmentTime { get; set; }
-        public Doctor doctor { get; set; }
-        [ForeignKey("DoctorId")]
+        [Required(ErrorMessage = "DoctorId is Required")]
+
         public string DoctorId { get; set; }
-        //public Employee employee { get; set; }
-        //[ForeignKey("EmployeeId")]
-        //public string EmployeeId { get; set; }
-        public PatientReg patientReg { get; set; }
-        [ForeignKey("PatientId")]
+        [Required(ErrorMessage = "PatientId is Required")]
+
         public string PatientId { get; set; }
     }
 }

@@ -37,7 +37,18 @@ namespace HMS.DAL.Repository
 
         public IEnumerable<Doctor> GetDoctors()
         {
-            return _hMSDbContext.doctor.ToList();
+            /* var items = _hMSDbContext.doctor.Where(x => x.ID==doct)
+
+                  .Select(x => new
+                  {
+                      P1 = table.Prop1,
+                      P2 = table.Prop2
+                  });*/
+            var s = _hMSDbContext.doctor
+        .Where(c => c.DoctorId == 1)
+        .ToList();
+            //return _hMSDbContext.doctor.ToList();
+            return s;
         }
 
         public void UpdateDoctor(Doctor doctor)
@@ -45,6 +56,7 @@ namespace HMS.DAL.Repository
             _hMSDbContext.Entry(doctor).State = EntityState.Modified;
             _hMSDbContext.SaveChanges();
         }
+
         public Doctor Login(Doctor doctor)
         {
             Doctor doctorinfo = null;
